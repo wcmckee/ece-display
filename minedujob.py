@@ -3,26 +3,55 @@
 
 # <h3>minedujob</h3>
 # 
-# Python script to fetch random job from Ministry Of Education and convert it into a json object. 
-# Merge data in from DigitalNZ.
+# Python script to fetch jobs from Ministry Of Education and convert it into a json object. Fix format problems around the xml.  
 # 
 # 
 
+# In[ ]:
+
+
+
+
 # TODO
 # 
-# Parse description tag for the keys and values hidden within that. 
-# Extract email from description, if email look up persons phone number and attach it.
+# done - Parse description tag for the keys and values hidden within that. 
+# done - Extract email from description, if email look up persons phone number and attach it.
 # 
-# Location - look on digitalnz for creative commons commucial use images
+# Location - look on digitalnz for cc by images. Search location and aerial photos of the area that could be used in the job ad.
 # title - 
 # 
 # scrape url.
 # 
-# cycle over all job listings and create json object with them all instead of just a random choice.
+# done - cycle over all job listings and create json object with them all instead of just a random choice.
 # 
 # Short the url
+# 
+# Fix arrow to convert to the time given rather than time now.
+# 
+# Merge data in from DigitalNZ.
+# 
+# What other apis could i merge in?
+# 
+# Fix the li that doesn't get included in description text (p) and make sure it is included.
+# 
+# 
 
-# In[364]:
+# In[379]:
+
+
+
+
+# In[379]:
+
+
+
+
+# In[379]:
+
+
+
+
+# In[380]:
 
 import requests
 #import untangle
@@ -33,91 +62,91 @@ import bs4
 #import dominate
 #from dominate.tags import *
 #from pydnz import Dnz
-import arrow
+#import arrow
 import bs4
 #import pyshorteners
 #import tweepy
 
 
-# In[364]:
+# In[380]:
 
 
 
 
-# In[364]:
+# In[380]:
 
 
 
 
-# In[365]:
+# In[381]:
 
 #dnz = Dnz('keyhere')
 
 
-# In[366]:
+# In[382]:
 
 jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS')
 
 
-# In[367]:
+# In[383]:
 
 jobtxta = jobreq.text
 
 
-# In[368]:
+# In[384]:
 
 #obj = untangle.parse(jobtxta)
 
 
-# In[369]:
+# In[385]:
 
 #obj
 
 
-# In[370]:
+# In[386]:
 
 dicjobz = xmltodict.parse(jobtxta)
 
 
-# In[371]:
+# In[387]:
 
 ranldicj = len(dicjobz['rss']['channel']['item'])
 
 
-# In[372]:
+# In[388]:
 
 #ranldicj
 
 
-# In[373]:
+# In[389]:
 
 #randicz = random.randint(0, ranldicj)
 
 
-# In[374]:
+# In[390]:
 
 #randicz
 
 
-# In[375]:
+# In[391]:
 
 wrapdict = dict()
 
 
-# In[376]:
+# In[394]:
 
 for dic in range(ranldicj):
     dicrs = dicjobz['rss']['channel']['item'][dic]
     dicrts = dicrs['title']
     dicrtq = dicrs
-    artim = arrow.now(dicrtq['pubDate'])
-    jobclose = artim.replace(weeks=+2)
-    jclodat = jobclose.date()
+    #artim = arrow.now(dicrtq['pubDate'])
+    #jobclose = artim.replace(weeks=+2)
+    #jclodat = jobclose.date()
     msjobdic = dict()
-    msjobdic.update({'date-advertised' : str(artim.date()), 
-                'time-advertised' : str(artim.time()),
-                'title' : dicrts,
-                'date-closed' : str(jclodat)})
+    #msjobdic.update({#'date-advertised' : str(artim.date()), 
+                #'time-advertised' : str(artim.time()),
+                #'title' : dicrts,
+                #'date-closed' : str(jclodat)})
     requlink = dicrtq['link']
     reqlinkq = requests.get(requlink)
     bsoup = bs4.BeautifulSoup(reqlinkq.text)
@@ -135,10 +164,12 @@ for dic in range(ranldicj):
         if '.docx' in bfiny.text:
             msjobdic.update({'doc' : bfiny.text})
     msjobdic.update({'link' : dicrtq['link']})
-    msjobdic.update({'filepath' : ('/home/wcmckee/minedujob/' + str(dic) + '.json')})
+    msjobdic.update({'jsonlen' : (str(dic))})
     bsdescr = bs4.BeautifulSoup(dicrtq['description'])
     txtspli = [line.text.split(": ") for line in bsdescr.findAll('li')[0:8]]
+    docitems = [line.text.split(": ") for line in bsdescr.findAll('li')[9:]]
     findict = dict()
+    findict.update({'lidocend' : docitems})
     totlen = len(txtspli)
     for tes in range(totlen):
         findict.update({txtspli[tes][0] : txtspli[tes][1]})
@@ -157,7 +188,7 @@ for dic in range(ranldicj):
     
 
 
-# In[377]:
+# In[395]:
 
 opind.close()
 

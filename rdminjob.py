@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[51]:
+# In[25]:
 
 import json
 import bs4
@@ -20,44 +20,44 @@ from dominate.tags import *
 # 
 # The key 'lidocend' is good things to have for the job. It is a series of ['blahbhal'],
 
-# In[52]:
+# In[26]:
 
 opwse = open('/home/wcmckee/minedujob/index.json', 'r')
 
 
-# In[53]:
+# In[27]:
 
 jsloaop = json.loads(opwse.read())
 
 
-# In[54]:
+# In[28]:
 
 lejsp = len(jsloaop)
 
 
-# In[55]:
+# In[29]:
 
 #ranlej = random.randint(0, lejsp)
 
 
-# In[56]:
+# In[30]:
 
-#jsloaop
+jsloaop
 
 
-# In[57]:
+# In[31]:
 
 #listed = list()
 
 
-# In[58]:
+# In[32]:
 
 #for jsran in range(lejsp):
     #print jsloaop.values()[jsran]['lidocend']
     #listed.append(jsloaop.values()[jsran]['lidocend'])
 
 
-# In[59]:
+# In[33]:
 
 #for lis in listed:
     #print lis
@@ -67,7 +67,7 @@ lejsp = len(jsloaop)
             #print wq
 
 
-# In[60]:
+# In[34]:
 
 #for jsran in range(lejsp):
     #print jsloaop.values()[jsran]['Category']
@@ -78,12 +78,12 @@ lejsp = len(jsloaop)
             #print jl
 
 
-# In[61]:
+# In[35]:
 
 #print (jsloaop[0])
 
 
-# In[62]:
+# In[44]:
 
 doc = dominate.document(title='Ministry of Education Jobs')
 
@@ -95,6 +95,8 @@ with doc.head:
     with div():
         attr(cls='header')
         h1('Ministry of Education Jobs')
+        p(img('logo.png', src='logo.png'))
+
         #p(img('imgs/getsdrawn-bw.png', src='imgs/getsdrawn-bw.png'))
         #p(img('imgs/15/01/02/ReptileLover82-reference.png', src= 'imgs/15/01/02/ReptileLover82-reference.png'))
         #h1('Updated ', strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime()))
@@ -109,11 +111,15 @@ with doc:
             h3(jsloaop.values()[jsran]['Job Title'])
             p(jsloaop.values()[jsran]['Category'])
             p(jsloaop.values()[jsran]['Job Type'])
+            p(jsloaop.values()[jsran]['Date Advertised'])
+
+            #p(jsloaop.values()[jsran]['email'])
+
             for jsl in jsloaop.values()[jsran]['lidocend']:
         #print jsl
                 for jl in jsl:
                     p(jl)
-    
+        #<a href="mailto:name@email.com">Link text</a>
         
         
         #for rdz in reliz:
@@ -137,14 +143,14 @@ with doc:
 
     with div():
         attr(cls='body')
-        p('GetsDrawn is open source')
-        a('https://github.com/getsdrawn/getsdrawndotcom')
-        a('https://reddit.com/r/redditgetsdrawn')
+        p('MinistryOfEducationJobs is open source')
+        a('https://github.com/wcmckee/ece-display')
+        a('https://wcmckee.com')
 
 #print doc
 
 
-# In[63]:
+# In[45]:
 
 docre = doc.render()
 #s = docre.decode('ascii', 'ignore')
@@ -155,7 +161,7 @@ mkind.write(yourstring)
 mkind.close()
 
 
-# In[8]:
+# In[41]:
 
 #noranch = jsloaop[0]
 

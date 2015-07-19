@@ -22,7 +22,7 @@ from dominate.tags import *
 
 # In[26]:
 
-opwse = open('/home/wcmckee/minedujob/index.json', 'r')
+opwse = open('/home/wcmckee/github/wcmckee.com/output/minedujobs/index.json', 'r')
 
 
 # In[27]:
@@ -155,7 +155,7 @@ with doc:
 docre = doc.render()
 #s = docre.decode('ascii', 'ignore')
 yourstring = docre.encode('ascii', 'ignore').decode('ascii')
-indfil = ('/home/wcmckee/minedujob/index.html')
+indfil = ('/home/wcmckee/github/wcmckee.com/output/minedujobs/index.html')
 mkind = open(indfil, 'w')
 mkind.write(yourstring)
 mkind.close()

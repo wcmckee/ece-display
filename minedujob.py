@@ -7,7 +7,7 @@
 # 
 # 
 
-# In[ ]:
+# In[14]:
 
 
 
@@ -36,22 +36,22 @@
 # 
 # 
 
-# In[379]:
+# In[14]:
 
 
 
 
-# In[379]:
+# In[14]:
 
 
 
 
-# In[379]:
+# In[14]:
 
 
 
 
-# In[380]:
+# In[15]:
 
 import requests
 #import untangle
@@ -63,77 +63,77 @@ import bs4
 #from dominate.tags import *
 #from pydnz import Dnz
 #import arrow
-import bs4
+#import bs4
 #import pyshorteners
 #import tweepy
 
 
-# In[380]:
+# In[15]:
 
 
 
 
-# In[380]:
+# In[15]:
 
 
 
 
-# In[381]:
+# In[16]:
 
 #dnz = Dnz('keyhere')
 
 
-# In[382]:
+# In[17]:
 
 jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS')
 
 
-# In[383]:
+# In[18]:
 
 jobtxta = jobreq.text
 
 
-# In[384]:
+# In[19]:
 
 #obj = untangle.parse(jobtxta)
 
 
-# In[385]:
+# In[20]:
 
 #obj
 
 
-# In[386]:
+# In[21]:
 
 dicjobz = xmltodict.parse(jobtxta)
 
 
-# In[387]:
+# In[22]:
 
 ranldicj = len(dicjobz['rss']['channel']['item'])
 
 
-# In[388]:
+# In[23]:
 
 #ranldicj
 
 
-# In[389]:
+# In[24]:
 
 #randicz = random.randint(0, ranldicj)
 
 
-# In[390]:
+# In[25]:
 
 #randicz
 
 
-# In[391]:
+# In[26]:
 
 wrapdict = dict()
 
 
-# In[394]:
+# In[27]:
 
 for dic in range(ranldicj):
     dicrs = dicjobz['rss']['channel']['item'][dic]
@@ -180,7 +180,7 @@ for dic in range(ranldicj):
     wrapdict.update({dic : msjobz})
     jsmsdob = json.dumps(wrapdict)
     #opeind = open('/home/wcmckee/minedujob/' + str(dic) + '.json', 'w')
-    opind = open('/home/wcmckee/minedujob/index.json', 'w')
+    opind = open('/home/wcmckee/github/wcmckee.com/output/minedujobs/index.json', 'w')
     opind.write(jsmsdob)
     #api.update_status(dicrts)
     #opeind.close()
@@ -188,58 +188,58 @@ for dic in range(ranldicj):
     
 
 
-# In[395]:
+# In[28]:
 
 opind.close()
 
 
-# In[ ]:
+# In[14]:
 
 
 
 
-# In[ ]:
+# In[15]:
 
 #opeind.close()
 
 
-# In[300]:
+# In[16]:
 
 #dicrs = dicjobz['rss']['channel']['item'][0]
 
 
-# In[301]:
+# In[17]:
 
 #dicrts = dicrs['title']
 #dicrtq = dicrs
 
 
-# In[182]:
+# In[18]:
 
 #artim = arrow.now(dicrtq['pubDate'])
 
 
-# In[183]:
+# In[19]:
 
 #jobclose = artim.replace(weeks=+2)
 
 
-# In[184]:
+# In[20]:
 
 #jclodat = jobclose.date()
 
 
-# In[184]:
+# In[20]:
 
 
 
 
-# In[185]:
+# In[21]:
 
 #msjobdic = dict()
 
 
-# In[186]:
+# In[22]:
 
 #msjobdic.update({'date-advertised' : str(artim.date()), 
 #                'time-advertised' : str(artim.time()),
@@ -247,32 +247,32 @@ opind.close()
 #                'date-closed' : str(jclodat)})
 
 
-# In[187]:
+# In[23]:
 
 #msjobdic
 
 
-# In[188]:
+# In[24]:
 
 #requlink = dicrtq['link']
 
 
-# In[189]:
+# In[25]:
 
 #reqlinkq = requests.get(requlink)
 
 
-# In[190]:
+# In[26]:
 
 #bsoup = bs4.BeautifulSoup(reqlinkq.text)
 
 
-# In[191]:
+# In[27]:
 
 #bfina = bsoup.findAll('a')
 
 
-# In[192]:
+# In[28]:
 
 #msjobdic.update({'date advertised' : str(artim.date()), 
 #                'time advertised' : str(artim.time()),
@@ -285,20 +285,20 @@ opind.close()
         
 
 
-# In[193]:
+# In[29]:
 
 #for bfiny in bfina:
 #    if '.docx' in bfiny.text:
 #        print bfiny.text
 
 
-# In[194]:
+# In[30]:
 
 #Search for this file and render text.
 #if jpg/gif render.
 
 
-# In[195]:
+# In[31]:
 
 #for bfin in bfina:
 #    if ('href') in bfin.text:
@@ -306,93 +306,93 @@ opind.close()
 #        msjobdic.update({('href') : str(bfin.text)})
 
 
-# In[196]:
+# In[32]:
 
 #msjob
 
 
-# In[197]:
+# In[33]:
 
 #msjobdic.update({'randnum' : randicz})
 
 
-# In[198]:
+# In[34]:
 
 #for bfiny in bfina:
 #    if '.docx' in bfiny.text:
 #        msjobdic.update({'doc' : bfiny.text})
 
 
-# In[199]:
+# In[35]:
 
 #msjobdic
 
 
-# In[200]:
+# In[36]:
 
 #msjobdic.update({'link' : dicrtq['link']})
 
 
-# In[201]:
+# In[37]:
 
 #msjobdic
 
 
-# In[202]:
+# In[38]:
 
 #msjobdic.update({'doc' : b
 
 
-# In[203]:
+# In[39]:
 
 #bsdescr = bs4.BeautifulSoup(dicrtq['description'])
 
 
-# In[204]:
+# In[40]:
 
 #for iza in bsdescr.findAll('li')[0:8]:
 #    print iza
 
 
-# In[205]:
+# In[41]:
 
 #lili = list()
 
 
-# In[206]:
+# In[42]:
 
 #txtspli = [line.text.split(": ") for line in bsdescr.findAll('li')[0:8]]
 
 
-# In[207]:
+# In[43]:
 
 #findict = dict()
 
 
-# In[208]:
+# In[44]:
 
 #totlen = len(txtspli)
 
 
-# In[209]:
+# In[45]:
 
 #for tes in range(totlen):
 #    findict.update({txtspli[tes][0] : txtspli[tes][1]})
     
 
 
-# In[210]:
+# In[46]:
 
 #findict.update({txtspli[0][0] : txtspli[0][1]})
 
 
-# In[211]:
+# In[47]:
 
 #msjobz = findict.copy()
 #msjobz.update(msjobdic)
 
 
-# In[212]:
+# In[48]:
 
 #for bsdz in bsdescr.findAll('li'):
 #    (k,v) = bsdz.text.split(": ")
@@ -401,22 +401,22 @@ opind.close()
 #    lili.append(bsdz.text)
 
 
-# In[213]:
+# In[49]:
 
 #txtlis = list()
 
 
-# In[213]:
+# In[49]:
 
 
 
 
-# In[214]:
+# In[50]:
 
 #bsp = bsdescr.findAll('p')
 
 
-# In[215]:
+# In[51]:
 
 #for bs in bsp:
     #print bs.text
@@ -430,58 +430,58 @@ opind.close()
     
 
 
-# In[216]:
+# In[52]:
 
 #dicrts
 
 
-# In[217]:
+# In[53]:
 
 #debsnz =  dnz.search(dicrs)
 
 
-# In[218]:
+# In[54]:
 
 #randrecord = len(debsnz.records)
 
 
-# In[219]:
+# In[55]:
 
 #ranitdz = random.randint(0, randrecord)
 
 
-# In[220]:
+# In[56]:
 
 #ranitdz
 
 
-# In[221]:
+# In[57]:
 
 #randicz
 
 
-# In[222]:
+# In[58]:
 
 #debsnz.records
 
 
-# In[223]:
+# In[59]:
 
 #debrecintz = debsnz.records[ranitdz]
 
 
-# In[224]:
+# In[60]:
 
 #kederz = debrecintz.keys()
 
 
-# In[225]:
+# In[61]:
 
 #print debrecintz['category']
 #print debrecintz['usage']
 
 
-# In[226]:
+# In[62]:
 
 #for ked in kederz:
 #    print ked
@@ -491,37 +491,37 @@ opind.close()
     #print debrecintz['category']
 
 
-# In[227]:
+# In[63]:
 
 #print debrecintz['id']
 
 
-# In[228]:
+# In[64]:
 
 #getiddnz = ('http://api.digitalnz.org/v3/records/' + str(debrecintz['id']) + '.json?api_key=Ph2LDuyiJmJcQm1S5myy')
 
 
-# In[229]:
+# In[65]:
 
 #getiddnz
 
 
-# In[230]:
+# In[66]:
 
 #reqidnz = requests.get(getiddnz)
 
 
-# In[231]:
+# In[67]:
 
 #json.dumps(reqidnz)
 
 
-# In[232]:
+# In[68]:
 
 #mylirq = list()
 
 
-# In[233]:
+# In[69]:
 
 #for reqi in reqidnz:
     #print reqi
@@ -529,44 +529,44 @@ opind.close()
     #reqi
 
 
-# In[234]:
+# In[70]:
 
 #my_dict.pop("key", None)
 
 
-# In[235]:
+# In[71]:
 
 #dicrq = len(dicjobz['rss']['channel']['item'])
 
 
-# In[236]:
+# In[72]:
 
 #dicrq
 
 
-# In[237]:
+# In[73]:
 
 #Return a random job.
 
 
-# In[238]:
+# In[74]:
 
 #ranjoz = random.randint(0, dicrq)
 
 #dicrsch = dicjobz['rss']['channel']['item']
 
 
-# In[239]:
+# In[75]:
 
 #print dicrsch[ranjoz]['link']
 
 
-# In[240]:
+# In[76]:
 
 #print dicrsch[ranjoz]['title']
 
 
-# In[241]:
+# In[77]:
 
 #jobtype
 #location
@@ -578,14 +578,14 @@ opind.close()
 #Create new json file that fixes this.
 
 
-# In[242]:
+# In[78]:
 
 #for dezsr in  dicrsch[ranjoz]['description']:
 ##    if 'JobType' in dezs#r:
 # #       print dezsr
 
 
-# In[243]:
+# In[79]:
 
 #docstart.title = ('ministry-of-education-jobs')
 #doc = dominate.document(title='ministry-of-education-jobs')
@@ -615,7 +615,7 @@ opind.close()
         
 
 
-# In[244]:
+# In[80]:
 
 #print doc
 
@@ -628,32 +628,32 @@ opind.close()
 #mkind.close()
 
 
-# In[261]:
+# In[81]:
 
 #jsmsdob = json.dumps(msjobdic)
 
 
-# In[262]:
+# In[82]:
 
 #opeind = open('/home/wcmckee/minedujob/minedujobs.json', 'w')
 
 
-# In[263]:
+# In[83]:
 
 #opeind.write(jsmsdob)
 
 
-# In[264]:
+# In[84]:
 
 #opeind.close()
 
 
-# In[248]:
+# In[84]:
 
 
 
 
-# In[ ]:
+# In[84]:
 
 
 

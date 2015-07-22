@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[25]:
+# In[1]:
 
 import json
 import bs4
@@ -20,44 +20,44 @@ from dominate.tags import *
 # 
 # The key 'lidocend' is good things to have for the job. It is a series of ['blahbhal'],
 
-# In[26]:
+# In[4]:
 
 opwse = open('/home/wcmckee/github/wcmckee.com/output/minedujobs/index.json', 'r')
 
 
-# In[27]:
+# In[5]:
 
 jsloaop = json.loads(opwse.read())
 
 
-# In[28]:
+# In[6]:
 
 lejsp = len(jsloaop)
 
 
-# In[29]:
+# In[7]:
 
 #ranlej = random.randint(0, lejsp)
 
 
-# In[30]:
+# In[8]:
 
 jsloaop
 
 
-# In[31]:
+# In[9]:
 
 #listed = list()
 
 
-# In[32]:
+# In[10]:
 
 #for jsran in range(lejsp):
     #print jsloaop.values()[jsran]['lidocend']
     #listed.append(jsloaop.values()[jsran]['lidocend'])
 
 
-# In[33]:
+# In[11]:
 
 #for lis in listed:
     #print lis
@@ -67,7 +67,7 @@ jsloaop
             #print wq
 
 
-# In[34]:
+# In[12]:
 
 #for jsran in range(lejsp):
     #print jsloaop.values()[jsran]['Category']
@@ -83,7 +83,7 @@ jsloaop
 #print (jsloaop[0])
 
 
-# In[44]:
+# In[16]:
 
 doc = dominate.document(title='Ministry of Education Jobs')
 
@@ -108,11 +108,19 @@ with doc.head:
 with doc:
     with div(id='body'):
         for jsran in range(lejsp):
+            h2(a((jsloaop.values()[jsran]['Job Title']), href=jsloaop.values()[jsran]['link']))
             h3(jsloaop.values()[jsran]['Job Title'])
             p(jsloaop.values()[jsran]['Category'])
             p(jsloaop.values()[jsran]['Job Type'])
             p(jsloaop.values()[jsran]['Date Advertised'])
-
+            p(jsloaop.values()[jsran]['Job Reference'])
+            
+            #try:
+            #    p(a('email', href= 'mailto:' + jsloaop.values()[jsran]['email']))
+            #except NameError:
+            #    skip
+            #if 'email' in jsloaop.keys():
+            #p(a('email', href= 'mailto:' + jsloaop.values()[jsran]['email']))
             #p(jsloaop.values()[jsran]['email'])
 
             for jsl in jsloaop.values()[jsran]['lidocend']:
@@ -144,13 +152,15 @@ with doc:
     with div():
         attr(cls='body')
         p('MinistryOfEducationJobs is open source')
-        a('https://github.com/wcmckee/ece-display')
-        a('https://wcmckee.com')
+        p(a('github - ece-display', href='https://github.com/wcmckee/ece-display'))
+        p(a('wcmckee', href='http://wcmckee.com'))
+        #a('https://github.com/wcmckee/ece-display')
+        #a('http://wcmckee.com')
 
 #print doc
 
 
-# In[45]:
+# In[17]:
 
 docre = doc.render()
 #s = docre.decode('ascii', 'ignore')

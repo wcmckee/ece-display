@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[21]:
 
 import json
 import bs4
@@ -12,6 +12,7 @@ import bs4
 #import random
 import dominate
 from dominate.tags import * 
+#import pydnz
 
 
 # <h3>Read Min Job</h3>
@@ -33,6 +34,26 @@ jsloaop = json.loads(opwse.read())
 # In[6]:
 
 lejsp = len(jsloaop)
+
+
+# In[20]:
+
+#rdjsop = 'ysgF_WqSpx1vofqAx7qG'
+
+
+# In[23]:
+
+#dnz = pydnz.Dnz(rdjsop)
+
+
+# In[24]:
+
+#dnz.search
+
+
+# In[ ]:
+
+
 
 
 # In[7]:
@@ -83,7 +104,17 @@ jsloaop
 #print (jsloaop[0])
 
 
-# In[16]:
+# In[39]:
+
+#import random
+
+
+# In[40]:
+
+#randitez = random.randint(0,100)
+
+
+# In[48]:
 
 doc = dominate.document(title='Ministry of Education Jobs')
 
@@ -109,12 +140,17 @@ with doc:
     with div(id='body'):
         for jsran in range(lejsp):
             h2(a((jsloaop.values()[jsran]['Job Title']), href=jsloaop.values()[jsran]['link']))
-            h3(jsloaop.values()[jsran]['Job Title'])
-            p(jsloaop.values()[jsran]['Category'])
+            #h3(jsloaop.values()[jsran]['Job Title'])
+            h3(jsloaop.values()[jsran]['Category'])
             p(jsloaop.values()[jsran]['Job Type'])
             p(jsloaop.values()[jsran]['Date Advertised'])
             p(jsloaop.values()[jsran]['Job Reference'])
+            p(jsloaop.values()[jsran]['Location'])
             
+            #locdnz = dnz.search(jsloaop.values()[jsran]['Location'])
+            #randitez = random.randint(0,5)
+            #p(locdnz.records[0]['description'])
+            #print locdnz.records
             #try:
             #    p(a('email', href= 'mailto:' + jsloaop.values()[jsran]['email']))
             #except NameError:
@@ -160,7 +196,7 @@ with doc:
 #print doc
 
 
-# In[17]:
+# In[49]:
 
 docre = doc.render()
 #s = docre.decode('ascii', 'ignore')

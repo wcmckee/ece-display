@@ -7,7 +7,7 @@
 # 
 # 
 
-# In[14]:
+# In[ ]:
 
 
 
@@ -36,22 +36,7 @@
 # 
 # 
 
-# In[14]:
-
-
-
-
-# In[14]:
-
-
-
-
-# In[14]:
-
-
-
-
-# In[15]:
+# In[1]:
 
 import requests
 #import untangle
@@ -66,74 +51,70 @@ import bs4
 #import bs4
 #import pyshorteners
 #import tweepy
+import getpass
 
 
-# In[15]:
+# In[2]:
+
+myusr = getpass.getuser()
 
 
-
-
-# In[15]:
-
-
-
-
-# In[16]:
+# In[3]:
 
 #dnz = Dnz('keyhere')
 
 
-# In[17]:
+# In[4]:
 
-jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS')
+jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS', verify=False)
 
 
-# In[18]:
+# In[5]:
 
 jobtxta = jobreq.text
 
 
-# In[19]:
+# In[6]:
 
 #obj = untangle.parse(jobtxta)
 
 
-# In[20]:
+# In[7]:
 
 #obj
 
 
-# In[21]:
+# In[8]:
 
 dicjobz = xmltodict.parse(jobtxta)
 
 
-# In[22]:
+# In[9]:
 
 ranldicj = len(dicjobz['rss']['channel']['item'])
 
 
-# In[23]:
+# In[10]:
 
 #ranldicj
 
 
-# In[24]:
+# In[11]:
 
 #randicz = random.randint(0, ranldicj)
 
 
-# In[25]:
+# In[12]:
 
 #randicz
 
 
-# In[26]:
+# In[13]:
 
 wrapdict = dict()
 
 
-# In[27]:
+# In[19]:
 
 for dic in range(ranldicj):
     dicrs = dicjobz['rss']['channel']['item'][dic]
@@ -180,66 +161,68 @@ for dic in range(ranldicj):
     wrapdict.update({dic : msjobz})
     jsmsdob = json.dumps(wrapdict)
     #opeind = open('/home/wcmckee/minedujob/' + str(dic) + '.json', 'w')
-    opind = open('/home/wcmckee/github/wcmckee.com/output/minedujobs/index.json', 'w')
-    opind.write(jsmsdob)
+    with open('/home/{}/moejobs/index.json'.format(myusr), 'w') as moejsn:
+        moejsn.write(jsmsdob)
+    #opind = open('/home/{}/moejobs/index.json'.format(myusr), 'w')
+    #opind.write(jsmsdob)
     #api.update_status(dicrts)
     #opeind.close()
     
     
 
 
-# In[28]:
+# In[20]:
 
-opind.close()
-
-
-# In[14]:
+#opind.close()
 
 
+# In[ ]:
 
 
-# In[15]:
-
-#opeind.close()
 
 
 # In[16]:
 
+#opeind.close()
+
+
+# In[23]:
+
 #dicrs = dicjobz['rss']['channel']['item'][0]
 
 
-# In[17]:
+# In[24]:
 
 #dicrts = dicrs['title']
 #dicrtq = dicrs
 
 
-# In[18]:
+# In[25]:
 
 #artim = arrow.now(dicrtq['pubDate'])
 
 
-# In[19]:
+# In[26]:
 
 #jobclose = artim.replace(weeks=+2)
 
 
-# In[20]:
+# In[27]:
 
 #jclodat = jobclose.date()
 
 
-# In[20]:
+# In[ ]:
 
 
 
 
-# In[21]:
+# In[28]:
 
 #msjobdic = dict()
 
 
-# In[22]:
+# In[29]:
 
 #msjobdic.update({'date-advertised' : str(artim.date()), 
 #                'time-advertised' : str(artim.time()),
@@ -247,32 +230,32 @@ opind.close()
 #                'date-closed' : str(jclodat)})
 
 
-# In[23]:
+# In[30]:
 
 #msjobdic
 
 
-# In[24]:
+# In[31]:
 
 #requlink = dicrtq['link']
 
 
-# In[25]:
+# In[32]:
 
 #reqlinkq = requests.get(requlink)
 
 
-# In[26]:
+# In[33]:
 
 #bsoup = bs4.BeautifulSoup(reqlinkq.text)
 
 
-# In[27]:
+# In[34]:
 
 #bfina = bsoup.findAll('a')
 
 
-# In[28]:
+# In[35]:
 
 #msjobdic.update({'date advertised' : str(artim.date()), 
 #                'time advertised' : str(artim.time()),
@@ -285,20 +268,20 @@ opind.close()
         
 
 
-# In[29]:
+# In[36]:
 
 #for bfiny in bfina:
 #    if '.docx' in bfiny.text:
 #        print bfiny.text
 
 
-# In[30]:
+# In[37]:
 
 #Search for this file and render text.
 #if jpg/gif render.
 
 
-# In[31]:
+# In[38]:
 
 #for bfin in bfina:
 #    if ('href') in bfin.text:
@@ -306,49 +289,49 @@ opind.close()
 #        msjobdic.update({('href') : str(bfin.text)})
 
 
-# In[32]:
+# In[39]:
 
 #msjob
 
 
-# In[33]:
+# In[40]:
 
 #msjobdic.update({'randnum' : randicz})
 
 
-# In[34]:
+# In[41]:
 
 #for bfiny in bfina:
 #    if '.docx' in bfiny.text:
 #        msjobdic.update({'doc' : bfiny.text})
 
 
-# In[35]:
+# In[42]:
 
 #msjobdic
 
 
-# In[36]:
+# In[43]:
 
 #msjobdic.update({'link' : dicrtq['link']})
 
 
-# In[37]:
+# In[44]:
 
 #msjobdic
 
 
-# In[38]:
+# In[45]:
 
 #msjobdic.update({'doc' : b
 
 
-# In[39]:
+# In[46]:
 
 #bsdescr = bs4.BeautifulSoup(dicrtq['description'])
 
 
-# In[40]:
+# In[47]:
 
 #for iza in bsdescr.findAll('li')[0:8]:
 #    print iza

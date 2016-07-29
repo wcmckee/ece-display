@@ -36,7 +36,7 @@
 # 
 # 
 
-# In[1]:
+# In[23]:
 
 import requests
 #import untangle
@@ -44,6 +44,7 @@ import xmltodict
 import json
 #import random
 import bs4
+import os
 #import dominate
 #from dominate.tags import *
 #from pydnz import Dnz
@@ -54,67 +55,102 @@ import bs4
 import getpass
 
 
-# In[2]:
+# In[3]:
 
 myusr = getpass.getuser()
 
 
-# In[3]:
+# In[4]:
 
 #dnz = Dnz('keyhere')
 
 
-# In[4]:
+# In[5]:
 
 jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS', verify=False)
 
 
-# In[5]:
+# In[6]:
 
 jobtxta = jobreq.text
 
 
-# In[6]:
+# In[7]:
 
 #obj = untangle.parse(jobtxta)
 
 
-# In[7]:
+# In[8]:
 
 #obj
 
 
-# In[8]:
+# In[9]:
 
 dicjobz = xmltodict.parse(jobtxta)
 
 
-# In[9]:
+# In[10]:
 
 ranldicj = len(dicjobz['rss']['channel']['item'])
 
 
-# In[10]:
+# In[11]:
 
 #ranldicj
 
 
-# In[11]:
+# In[12]:
 
 #randicz = random.randint(0, ranldicj)
 
 
-# In[12]:
+# In[13]:
 
 #randicz
 
 
-# In[13]:
+# In[14]:
 
 wrapdict = dict()
 
 
+# In[18]:
+
+moejdir = ('/home/{}/moejobs/'.format(myusr))
+
+
 # In[19]:
+
+moejdir
+
+
+# In[ ]:
+
+
+
+
+# In[24]:
+
+def ospacheck():
+    if os.path.isdir(moejdir) == True:
+        print ('its true')
+    else:
+        print ('its false')
+        os.mkdir(moejdir)
+
+
+# In[25]:
+
+ospacheck()
+
+
+# In[ ]:
+
+
+
+
+# In[26]:
 
 for dic in range(ranldicj):
     dicrs = dicjobz['rss']['channel']['item'][dic]
@@ -171,7 +207,7 @@ for dic in range(ranldicj):
     
 
 
-# In[20]:
+# In[ ]:
 
 #opind.close()
 
@@ -181,12 +217,12 @@ for dic in range(ranldicj):
 
 
 
-# In[16]:
+# In[ ]:
 
 #opeind.close()
 
 
-# In[23]:
+# In[16]:
 
 #dicrs = dicjobz['rss']['channel']['item'][0]
 

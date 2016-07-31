@@ -36,7 +36,7 @@
 # 
 # 
 
-# In[23]:
+# In[1]:
 
 import requests
 #import untangle
@@ -55,19 +55,24 @@ import os
 import getpass
 
 
-# In[3]:
+# In[2]:
 
 myusr = getpass.getuser()
 
 
-# In[4]:
+# In[3]:
 
 #dnz = Dnz('keyhere')
 
 
+# In[4]:
+
+jobreq = requests.get('https://jobs.govt.nz/jobtools/job_rss?o1=16563&k2=7E204B6518FF9F28&source=JobRSS&medium=JobRSS', verify=False)
+
+
 # In[5]:
 
-jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS', verify=False)
+#jobreq = requests.get('https://jobs.minedu.govt.nz/jobtools/job_rss?o1=17584&k2=A52B3674BC046465&source=JobRSS&medium=JobRSS', verify=False)
 
 
 # In[6]:
@@ -82,45 +87,55 @@ jobtxta = jobreq.text
 
 # In[8]:
 
-#obj
+jobtxta
+
+
+# In[ ]:
+
+
 
 
 # In[9]:
 
-dicjobz = xmltodict.parse(jobtxta)
+#obj
 
 
 # In[10]:
 
-ranldicj = len(dicjobz['rss']['channel']['item'])
+dicjobz = xmltodict.parse(jobtxta)
 
 
 # In[11]:
 
-#ranldicj
+ranldicj = len(dicjobz['rss']['channel']['item'])
 
 
 # In[12]:
 
-#randicz = random.randint(0, ranldicj)
+#ranldicj
 
 
 # In[13]:
 
-#randicz
+#randicz = random.randint(0, ranldicj)
 
 
 # In[14]:
 
+#randicz
+
+
+# In[15]:
+
 wrapdict = dict()
 
 
-# In[18]:
+# In[16]:
 
 moejdir = ('/home/{}/moejobs/'.format(myusr))
 
 
-# In[19]:
+# In[17]:
 
 moejdir
 
@@ -130,7 +145,7 @@ moejdir
 
 
 
-# In[24]:
+# In[18]:
 
 def ospacheck():
     if os.path.isdir(moejdir) == True:
@@ -140,9 +155,24 @@ def ospacheck():
         os.mkdir(moejdir)
 
 
-# In[25]:
+# In[19]:
 
 ospacheck()
+
+
+# In[21]:
+
+#dicrtq
+
+
+# In[23]:
+
+bfina
+
+
+# In[25]:
+
+dicrs
 
 
 # In[ ]:
@@ -150,7 +180,7 @@ ospacheck()
 
 
 
-# In[26]:
+# In[22]:
 
 for dic in range(ranldicj):
     dicrs = dicjobz['rss']['channel']['item'][dic]
@@ -168,6 +198,7 @@ for dic in range(ranldicj):
     reqlinkq = requests.get(requlink)
     bsoup = bs4.BeautifulSoup(reqlinkq.text)
     bfina = bsoup.findAll('a')
+    
     for bfin in bfina:
         if ('@') in bfin.text:
             #print bfin.text
@@ -222,28 +253,28 @@ for dic in range(ranldicj):
 #opeind.close()
 
 
-# In[16]:
+# In[ ]:
 
 #dicrs = dicjobz['rss']['channel']['item'][0]
 
 
-# In[24]:
+# In[ ]:
 
 #dicrts = dicrs['title']
 #dicrtq = dicrs
 
 
-# In[25]:
+# In[ ]:
 
 #artim = arrow.now(dicrtq['pubDate'])
 
 
-# In[26]:
+# In[ ]:
 
 #jobclose = artim.replace(weeks=+2)
 
 
-# In[27]:
+# In[ ]:
 
 #jclodat = jobclose.date()
 
@@ -253,12 +284,12 @@ for dic in range(ranldicj):
 
 
 
-# In[28]:
+# In[ ]:
 
 #msjobdic = dict()
 
 
-# In[29]:
+# In[ ]:
 
 #msjobdic.update({'date-advertised' : str(artim.date()), 
 #                'time-advertised' : str(artim.time()),
@@ -266,32 +297,32 @@ for dic in range(ranldicj):
 #                'date-closed' : str(jclodat)})
 
 
-# In[30]:
+# In[ ]:
 
 #msjobdic
 
 
-# In[31]:
+# In[ ]:
 
 #requlink = dicrtq['link']
 
 
-# In[32]:
+# In[ ]:
 
 #reqlinkq = requests.get(requlink)
 
 
-# In[33]:
+# In[ ]:
 
 #bsoup = bs4.BeautifulSoup(reqlinkq.text)
 
 
-# In[34]:
+# In[ ]:
 
 #bfina = bsoup.findAll('a')
 
 
-# In[35]:
+# In[ ]:
 
 #msjobdic.update({'date advertised' : str(artim.date()), 
 #                'time advertised' : str(artim.time()),
@@ -304,20 +335,20 @@ for dic in range(ranldicj):
         
 
 
-# In[36]:
+# In[ ]:
 
 #for bfiny in bfina:
 #    if '.docx' in bfiny.text:
 #        print bfiny.text
 
 
-# In[37]:
+# In[ ]:
 
 #Search for this file and render text.
 #if jpg/gif render.
 
 
-# In[38]:
+# In[ ]:
 
 #for bfin in bfina:
 #    if ('href') in bfin.text:
@@ -325,93 +356,93 @@ for dic in range(ranldicj):
 #        msjobdic.update({('href') : str(bfin.text)})
 
 
-# In[39]:
+# In[ ]:
 
 #msjob
 
 
-# In[40]:
+# In[ ]:
 
 #msjobdic.update({'randnum' : randicz})
 
 
-# In[41]:
+# In[ ]:
 
 #for bfiny in bfina:
 #    if '.docx' in bfiny.text:
 #        msjobdic.update({'doc' : bfiny.text})
 
 
-# In[42]:
+# In[ ]:
 
 #msjobdic
 
 
-# In[43]:
+# In[ ]:
 
 #msjobdic.update({'link' : dicrtq['link']})
 
 
-# In[44]:
+# In[ ]:
 
 #msjobdic
 
 
-# In[45]:
+# In[ ]:
 
 #msjobdic.update({'doc' : b
 
 
-# In[46]:
+# In[ ]:
 
 #bsdescr = bs4.BeautifulSoup(dicrtq['description'])
 
 
-# In[47]:
+# In[ ]:
 
 #for iza in bsdescr.findAll('li')[0:8]:
 #    print iza
 
 
-# In[41]:
+# In[ ]:
 
 #lili = list()
 
 
-# In[42]:
+# In[ ]:
 
 #txtspli = [line.text.split(": ") for line in bsdescr.findAll('li')[0:8]]
 
 
-# In[43]:
+# In[ ]:
 
 #findict = dict()
 
 
-# In[44]:
+# In[ ]:
 
 #totlen = len(txtspli)
 
 
-# In[45]:
+# In[ ]:
 
 #for tes in range(totlen):
 #    findict.update({txtspli[tes][0] : txtspli[tes][1]})
     
 
 
-# In[46]:
+# In[ ]:
 
 #findict.update({txtspli[0][0] : txtspli[0][1]})
 
 
-# In[47]:
+# In[ ]:
 
 #msjobz = findict.copy()
 #msjobz.update(msjobdic)
 
 
-# In[48]:
+# In[ ]:
 
 #for bsdz in bsdescr.findAll('li'):
 #    (k,v) = bsdz.text.split(": ")
@@ -420,22 +451,22 @@ for dic in range(ranldicj):
 #    lili.append(bsdz.text)
 
 
-# In[49]:
+# In[ ]:
 
 #txtlis = list()
 
 
-# In[49]:
+# In[ ]:
 
 
 
 
-# In[50]:
+# In[ ]:
 
 #bsp = bsdescr.findAll('p')
 
 
-# In[51]:
+# In[ ]:
 
 #for bs in bsp:
     #print bs.text
@@ -449,58 +480,58 @@ for dic in range(ranldicj):
     
 
 
-# In[52]:
+# In[ ]:
 
 #dicrts
 
 
-# In[53]:
+# In[ ]:
 
 #debsnz =  dnz.search(dicrs)
 
 
-# In[54]:
+# In[ ]:
 
 #randrecord = len(debsnz.records)
 
 
-# In[55]:
+# In[ ]:
 
 #ranitdz = random.randint(0, randrecord)
 
 
-# In[56]:
+# In[ ]:
 
 #ranitdz
 
 
-# In[57]:
+# In[ ]:
 
 #randicz
 
 
-# In[58]:
+# In[ ]:
 
 #debsnz.records
 
 
-# In[59]:
+# In[ ]:
 
 #debrecintz = debsnz.records[ranitdz]
 
 
-# In[60]:
+# In[ ]:
 
 #kederz = debrecintz.keys()
 
 
-# In[61]:
+# In[ ]:
 
 #print debrecintz['category']
 #print debrecintz['usage']
 
 
-# In[62]:
+# In[ ]:
 
 #for ked in kederz:
 #    print ked
@@ -510,37 +541,37 @@ for dic in range(ranldicj):
     #print debrecintz['category']
 
 
-# In[63]:
+# In[ ]:
 
 #print debrecintz['id']
 
 
-# In[64]:
+# In[ ]:
 
 #getiddnz = ('http://api.digitalnz.org/v3/records/' + str(debrecintz['id']) + '.json?api_key=Ph2LDuyiJmJcQm1S5myy')
 
 
-# In[65]:
+# In[ ]:
 
 #getiddnz
 
 
-# In[66]:
+# In[ ]:
 
 #reqidnz = requests.get(getiddnz)
 
 
-# In[67]:
+# In[ ]:
 
 #json.dumps(reqidnz)
 
 
-# In[68]:
+# In[ ]:
 
 #mylirq = list()
 
 
-# In[69]:
+# In[ ]:
 
 #for reqi in reqidnz:
     #print reqi
@@ -548,44 +579,44 @@ for dic in range(ranldicj):
     #reqi
 
 
-# In[70]:
+# In[ ]:
 
 #my_dict.pop("key", None)
 
 
-# In[71]:
+# In[ ]:
 
 #dicrq = len(dicjobz['rss']['channel']['item'])
 
 
-# In[72]:
+# In[ ]:
 
 #dicrq
 
 
-# In[73]:
+# In[ ]:
 
 #Return a random job.
 
 
-# In[74]:
+# In[ ]:
 
 #ranjoz = random.randint(0, dicrq)
 
 #dicrsch = dicjobz['rss']['channel']['item']
 
 
-# In[75]:
+# In[ ]:
 
 #print dicrsch[ranjoz]['link']
 
 
-# In[76]:
+# In[ ]:
 
 #print dicrsch[ranjoz]['title']
 
 
-# In[77]:
+# In[ ]:
 
 #jobtype
 #location
@@ -597,14 +628,14 @@ for dic in range(ranldicj):
 #Create new json file that fixes this.
 
 
-# In[78]:
+# In[ ]:
 
 #for dezsr in  dicrsch[ranjoz]['description']:
 ##    if 'JobType' in dezs#r:
 # #       print dezsr
 
 
-# In[79]:
+# In[ ]:
 
 #docstart.title = ('ministry-of-education-jobs')
 #doc = dominate.document(title='ministry-of-education-jobs')
@@ -634,7 +665,7 @@ for dic in range(ranldicj):
         
 
 
-# In[80]:
+# In[ ]:
 
 #print doc
 
@@ -647,32 +678,32 @@ for dic in range(ranldicj):
 #mkind.close()
 
 
-# In[81]:
+# In[ ]:
 
 #jsmsdob = json.dumps(msjobdic)
 
 
-# In[82]:
+# In[ ]:
 
 #opeind = open('/home/wcmckee/minedujob/minedujobs.json', 'w')
 
 
-# In[83]:
+# In[ ]:
 
 #opeind.write(jsmsdob)
 
 
-# In[84]:
+# In[ ]:
 
 #opeind.close()
 
 
-# In[84]:
+# In[ ]:
 
 
 
 
-# In[84]:
+# In[ ]:
 
 
 

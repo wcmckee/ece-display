@@ -13,7 +13,7 @@
 
 
 
-# In[1]:
+# In[33]:
 
 #import nikola
 
@@ -21,11 +21,7 @@ import requests
 import json
 import getpass
 import pandas
-
-
-# In[2]:
-
-myusr = getpass.getuser()
+import os
 
 
 # In[ ]:
@@ -33,32 +29,53 @@ myusr = getpass.getuser()
 
 
 
-# In[3]:
+# In[34]:
 
-opedu = open('/home/{}/moejobs/index.json'.format(myusr), 'r')
-
-
-# In[4]:
-
-minjob = opedu.read()
+myusr = getpass.getuser()
 
 
-# In[5]:
+# In[35]:
 
-dicminj = json.loads(minjob)
+with open('/home/{}/moejobs/index.json'.format(myusr), 'r') as opedu:
+          dicminj = json.loads(opedu.read())
 
 
-# In[6]:
+# In[ ]:
+
+
+
+
+# In[36]:
+
+#opedu = open('/home/{}/moejobs/index.json'.format(myusr), 'rb', 'utf-8')
+
+
+# In[ ]:
+
+
+
+
+# In[37]:
+
+#minjob = opedu.read()
+
+
+# In[38]:
+
+#dicminj = json.loads(minjob)
+
+
+# In[39]:
 
 ldic = len(dicminj)
 
 
-# In[11]:
+# In[40]:
 
 #print(dicminj)
 
 
-# In[12]:
+# In[41]:
 
 catlis = list()
 
@@ -72,7 +89,7 @@ jobti = list()
 
 
 
-# In[13]:
+# In[42]:
 
 numdic = dict()
 
@@ -82,7 +99,58 @@ numdic = dict()
 
 
 
-# In[16]:
+# In[43]:
+
+#catedi
+
+
+# In[ ]:
+
+
+
+
+# In[44]:
+
+#for hel in helpth:
+    #print(hel[0] + '/n')
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[45]:
+
+testlay = list()
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[46]:
 
 for ldi in range(ldic):
     dicjob = dict()
@@ -95,7 +163,7 @@ for ldi in range(ldic):
     helpth = (dicminj[str(ldi)]['lidocend'])
     
     jobref = (dicminj[str(ldi)]['Job Reference'])
-    jorefd = jobref[4:]
+    jorefd = jobref.replace('/', '-')
     print (jorefd)
     
     with open('/home/{}/minstryofedu/posts/{}.meta'.format(myusr, jorefd), 'w') as moemeta:
@@ -103,9 +171,12 @@ for ldi in range(ldic):
     #opmetf = open('/home/{}/minstryofedu/posts/{}.meta'.format(myusr, jorefd), 'w')
     #opmetf.write(jorefd + '\n' + jorefd + '\n' + str(pdate) + ' ' + str('09:00:00') + '\n' + catedi + ', ' + locdi)
     #opmetf.close()
-    
-    with open('/home/{}/minstryofedu/posts/{}.rst'.format(myusr, jorefd), 'w') as moerst:
-        moerst.write(titdi)
+    #print(helpth)
+    for hel in helpth:
+        print(hel[0] + '/n')
+        testlay.append(hel[0])
+        with open('/home/{}/minstryofedu/posts/{}.rst'.format(myusr, jorefd), 'w') as moerst:
+            moerst.write(titdi)
     #oprstfi = open('/home/{}/minstryofedu/posts/{}.rst'.format(myusr, jorefd), 'w')
     #oprstfi.write(titdi)
     #oprstfi.close()
@@ -113,7 +184,7 @@ for ldi in range(ldic):
 
 
     dicjob.update({'Category' : catedi, 'Date Advertised' : str(pdate), 'Job Title' : titdi,
-    'Location' : locdi, 'Job Reference' : jobref})
+    'Location' : locdi, 'Job Reference' : jobref, 'reqs' : helpth})
     
     numdic.update({ldi : dicjob})
     #numdic.update({ldi : dicjob})
@@ -131,6 +202,62 @@ for ldi in range(ldic):
     #    print (catedi)
 
         
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[47]:
+
+#json.dumps(numdic)
+
+
+# In[48]:
+
+with open('/home/{}/minstryofedu/output/index.json'.format(myusr), 'w') as moerst:
+    moerst.write(json.dumps(numdic))
+
+
+# In[49]:
+
+testlay
+
+
+# In[50]:
+
+os.chdir('/home/{}/minstryofedu/'.format(myusr))
+
+
+# In[51]:
+
+os.system('nikola build')
+
+
+# In[52]:
+
+os.system('aws s3 sync /home/{}/minstryofedu/output/ s3://moejobs'.format(myusr))
 
 
 # In[ ]:
